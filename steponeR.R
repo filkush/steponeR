@@ -7,10 +7,10 @@ steponeR <- function(files=NULL, delim=",", target.ratios=NULL, fluor.norm=NULL,
     temp <- suppressWarnings(readLines(x))
     linesToSkip <- grep("^Well", temp) - 1
     #dat <- data.frame(Filename=basename(x),
-    #                  read.csv(text=temp, skip=linesToSkip, na.strings="Undetermined"))
+    #                  read.txt(text=temp, skip=linesToSkip, na.strings="Undetermined"))
     dat <- data.frame(Filename=basename(x),
                       read.table(text=temp, skip=linesToSkip, header=T, na.strings="Undetermined",
-                                 sep=delim))
+                                 sep="\t"))
     #dat <- dat[which(dat$Target.Name!=""), ]  # Omit empty wells
     dat <- dat[which(dat[, grep("Target", colnames(dat), value=T)]!=""), ] # Omit empty wells using regex
     #dat$Sample.Name <- as.character(dat$Sample.Name)  # Convert sample names to character
