@@ -1,4 +1,4 @@
-steponeR <- function(files=NULL, delim=",", target.ratios=NULL, fluor.norm=NULL,
+steponeR <- function(files=NULL, delim="\t", target.ratios=NULL, fluor.norm=NULL,
                      copy.number=NULL, ploidy=NULL, extract=NULL) {
   require(plyr); require(reshape2)
   if(is.null(files)) stop("No data files specified")
@@ -10,7 +10,7 @@ steponeR <- function(files=NULL, delim=",", target.ratios=NULL, fluor.norm=NULL,
     #                  read.txt(text=temp, skip=linesToSkip, na.strings="Undetermined"))
     dat <- data.frame(Filename=basename(x),
                       read.table(text=temp, skip=linesToSkip, header=T, na.strings="Undetermined",
-                                 sep="\t"))
+                                 sep=delim))
     #dat <- dat[which(dat$Target.Name!=""), ]  # Omit empty wells
     dat <- dat[which(dat[, grep("Target", colnames(dat), value=T)]!=""), ] # Omit empty wells using regex
     #dat$Sample.Name <- as.character(dat$Sample.Name)  # Convert sample names to character
